@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Upload - VidTube</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="upload-box">
+      <h2>Upload Video</h2>
+
+      <input id="title" placeholder="Video title" />
+
+      <input type="file" id="video" />
+
+      <input type="file" id="thumbnail" />
+
+      <button onclick="uploadVideo()">Upload</button>
+    </div>
+
+    <script>
+      async function uploadVideo() {
+        const title = document.getElementById("title").value;
+        const video = document.getElementById("video").files[0];
+        const thumbnail = document.getElementById("thumbnail").files[0];
+
+        const form = new FormData();
+
+        form.append("title", title);
+        form.append("videoFile", video);
+        form.append("thumbnail", thumbnail);
+
+        await fetch("http://localhost:7000/api/v1/videos", {
+          method: "POST",
+          body: form,
+          credentials: "include",
+        });
+
+        alert("Video Uploaded");
+      }
+    </script>
+  </body>
+</html>

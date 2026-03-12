@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VidTube</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+VidTube
+</div>
+
+<input id="search" placeholder="Search videos">
+
+<div class="nav-actions">
+<button onclick="location.href='upload.html'">Upload</button>
+<button onclick="location.href='login.html'">Login</button>
+</div>
+
+</header>
+
+<div class="container">
+
+<aside class="sidebar">
+
+<a href="#">🏠 Home</a>
+<a href="#">🔥 Trending</a>
+<a href="#">📺 Subscriptions</a>
+<a href="#">🎞 Library</a>
+
+</aside>
+
+<main>
+
+<div id="videoGrid" class="video-grid"></div>
+
+</main>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
