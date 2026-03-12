@@ -1,4 +1,9 @@
-const API = "http://localhost:7000/api/v1";
+// const API = "http://localhost:7000/api/v1";
+// const API = "https://vidtube-mern-project.onrender.com/api/v1";
+const API =
+  window.location.hostname === "localhost"
+    ? "http://localhost:7000/api/v1"
+    : "https://vidtube-mern-project.onrender.com/api/v1";
 
 async function getVideos() {
   const res = await fetch(`${API}/videos`, {
