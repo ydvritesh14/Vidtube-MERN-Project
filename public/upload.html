@@ -32,7 +32,7 @@
         form.append("thumbnail", thumbnail);
 
         try {
-          const res = await fetch(`${API}/video/upload`, {
+          const res = await fetch(`${API}/videos/upload`, {
             // ✅ fixed route
             method: "POST",
             body: form,
