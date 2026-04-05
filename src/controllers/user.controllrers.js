@@ -122,16 +122,22 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password, username } = req.body;
 
   //validation
-    if ([email, password, username].some((field) => field?.trim() === ""))
-    {
-        console.log(typeof email, typeof password, typeof username); 
-    // check if any field is empty //trim() removes whitespace
-        throw new ApiError(400, "All fields are required");
+    // if ([email, password, username].some((field) => field?.trim() === ""))
+    // {
+    //     console.log(typeof email, typeof password, typeof username); 
+    // // check if any field is empty //trim() removes whitespace
+    //     throw new ApiError(400, "All fields are required");
+    // }
+    if (!email || !password) {
+      throw new ApiError(400, "Email and password are required");
     }
 
   //check if user exists
   const user = await User.findOne({
-    $or: [{ email }, { username }],
+    $or: [
+      { email },
+      ...(username ? [{ username }] : []), // only add username if provided
+    ],
   });
   //if user doesn't exist
   if (!user) {
