@@ -159,8 +159,10 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true, // not accessible by JS ,prevents client-side scripts from accessing the cookie
+    sameSite: "none", // cookie will only be sent in a first-party context and not be sent along with requests initiated by third party websites
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // cookie expires in 7 days
-    secure: process.env.NODE_ENV === "production", // only sent over HTTPS in production
+    // secure: process.env.NODE_ENV === "production", // only sent over HTTPS in production
+    secure:true, // for development, set secure to true to allow cookies to be sent over HTTP. In production, it should be set to true to ensure cookies are only sent over HTTPS.
   };
   return res
     .status(200)
@@ -197,7 +199,9 @@ const logoutUser = asyncHandler(async (req, res) => {
   // httpOnly prevents client-side scripts from accessing the cookie
   const options = {
     httpOnly: true, // not accessible by JS
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
+    secure: true,
+    sameSite: "none",
   };
   return res
     .status(200)
@@ -238,7 +242,9 @@ const refresAccessToken = asyncHandler(async (req, res) => {
     // Set new access token in cookies
     const options = {
       httpOnly: true, // not accessible by JS
-      secure: process.env.NODE_ENV === "production", // only sent over HTTPS in production
+      // secure: process.env.NODE_ENV === "production", // only sent over HTTPS in production
+      secure: true,
+      sameSite: "none",
     };
 
     // Generate new access token
